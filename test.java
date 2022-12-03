@@ -9,7 +9,6 @@ public class test {
     public static int[][] loadPixelsFromFile(File file) throws IOException {
 
         BufferedImage image = ImageIO.read(file);
-        Color[][] colors = new Color[image.getWidth()][image.getHeight()];
         int[][] grayscale = new int[image.getWidth()][image.getHeight()];
 
         for (int x = 0; x < image.getWidth(); x++) {
@@ -19,7 +18,6 @@ public class test {
                 int green = (color & 0xff00) >> 8;
                 int red = (color & 0xff000) >> 16;
                 grayscale[x][y] = (int) Math.round(.2126 * red + .7152 * green + .0722 * blue);
-                colors[x][y] = new Color(image.getRGB(x, y));
             }
         }
 
@@ -27,10 +25,13 @@ public class test {
     }
 
     public static void main(String[] args) throws IOException {
-        int[][] colors = loadPixelsFromFile(new File("pink.jpg"));
+        String pathname = args[0];
+        int[][] colors = loadPixelsFromFile(new File(pathname));
         for (int i = 0; i < colors.length; i++) {
             for (int j = 0; j < colors[i].length; j++) {
-                System.out.println(colors[i][j]);
+                System.out.print(colors[i][j]);
+                if ((i + 1) * (j + 1) < colors.length * colors[i].length) 
+                    System.out.print(", ");
             }
         }
     }
