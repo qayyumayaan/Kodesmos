@@ -8,23 +8,44 @@ import java.io.IOException;
 
 public class ConvertGrayScale {
 
-    public static void main(String... args) {
+    public static void toTxt(BufferedImage result, int rgb) {
+        int count = 0;
+        int value = 0;
+        for (int i = 0; i < result.getHeight(); i++) { // Y
+            for (int j = result.getWidth() - 1; j >= 0; j--) { // X
+                Color c = new Color(result.getRGB(i, j));
+                if (rgb == 0)
+                    value = c.getRed();
+                else if (rgb == 1)
+                    value = c.getGreen();
+                else if (rgb == 2)
+                    value = c.getBlue();
+                count++;
+                System.out.print(value);
+                if (count < result.getHeight() * result.getWidth())
+                    System.out.print(", ");
+            }
+        }
+    }
+
+    public static BufferedImage toGrayScaleInt(BufferedImage image) {
+
+        BufferedImage result = new BufferedImage(
+                image.getWidth(),
+                image.getHeight(),
+                BufferedImage.TYPE_INT_RGB);
 
         try {
-            String pathname = args[0];
-            File input = new File(pathname);
-            BufferedImage image = ImageIO.read(input);
-
-            BufferedImage result = new BufferedImage(
-                    image.getWidth(),
-                    image.getHeight(),
-                    BufferedImage.TYPE_INT_RGB);
+            // BufferedImage result = new BufferedImage(
+            // image.getWidth(),
+            // image.getHeight(),
+            // BufferedImage.TYPE_INT_RGB);
 
             Graphics2D graphic = result.createGraphics();
             graphic.drawImage(image, 0, 0, Color.WHITE, null);
 
-            for (int i = 0; i < result.getHeight(); i++) {
-                for (int j = 0; j < result.getWidth(); j++) {
+            for (int i = result.getHeight() - 1; i >= 0; i--) {
+                for (int j = result.getWidth() - 1; j >= 0; j--) {
                     Color c = new Color(result.getRGB(j, i));
                     int red = (int) (c.getRed() * 0.299);
                     int green = (int) (c.getGreen() * 0.587);
@@ -34,20 +55,28 @@ public class ConvertGrayScale {
                             red + green + blue,
                             red + green + blue);
                     result.setRGB(j, i, newColor.getRGB());
-                    int grayscaleBlue = result.getRGB(j, i) & 0xff;
-                    System.out.print(grayscaleBlue);
-                    if ((i + 1) * (j + 1) < result.getWidth() * result.getHeight()) 
-                        System.out.print(", ");
                 }
             }
 
             File output = new File("testImg.jpg");
             ImageIO.write(result, "jpg", output);
 
-        }  catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
+        return result;
+    }
 
+    public static void main(String... args) {
+        if (!args[0].isEmpty()) {
+            String pathname = args[0];
+            File input = new File(pathname);
+            try {
+                BufferedImage image = ImageIO.read(input);
+                toTxt(image, 1);
+            } catch (IOException e) {
+            }
+        }
     }
 
 }
