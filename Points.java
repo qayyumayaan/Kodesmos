@@ -9,8 +9,8 @@ class Points{
             }   
         }*/
 
-        for(int i = 0; i<=20; i++){
-            for(int j = 0; j<=20; j++){
+        for(int i = 0; i<=30; i++){
+            for(int j = 0; j<=30; j++){
                 System.out.println(i+", "+j);
             }
         }
