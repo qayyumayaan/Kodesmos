@@ -1,5 +1,3 @@
-// package com.memorynotfound.image;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -36,11 +34,6 @@ public class ConvertGrayScale {
                 BufferedImage.TYPE_INT_RGB);
 
         try {
-            // BufferedImage result = new BufferedImage(
-            // image.getWidth(),
-            // image.getHeight(),
-            // BufferedImage.TYPE_INT_RGB);
-
             Graphics2D graphic = result.createGraphics();
             graphic.drawImage(image, 0, 0, Color.WHITE, null);
 
