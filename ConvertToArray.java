@@ -85,7 +85,6 @@ class ConvertToArray{
                     value = c.getBlue();
                 count++;
                 toReturn+=value;
-                System.out.print(value);
                 if (count < result.getHeight() * result.getWidth())
                     toReturn+=", ";
             }
@@ -154,21 +153,29 @@ class ConvertToArray{
         System.out.print("Clipboard = b_0 = 0.00390625 * [");
         System.out.println(imageToTxt(fileName, 31, 0)+"]");
 
-        System.out.println("Send, ^v \nSleep, 100 \nSend, {Enter}");
+        System.out.println("Send, ^v \nSleep, 500 \nSend, {Enter}");
 
-        System.out.print("Clipboard = b_1 = 0.00390625 * ");
-        System.out.println(imageToTxt(fileName, 31, 1));
-        System.out.println("Send, ^v \nSleep, 100 \nSend, {Enter}");
+        System.out.print("Clipboard = b_1 = 0.00390625 * [");
+        System.out.println(imageToTxt(fileName, 31, 1)+"]");
+        System.out.println("Send, ^v \nSleep, 500 \nSend, {Enter}");
 
 
-        System.out.print("Clipboard = b_1 = 0.00390625 * ");
-        System.out.println(imageToTxt(fileName, 31, 2));
-        System.out.println("Send, ^v \nSleep, 100 \nSend, {Enter}");
+        System.out.print("Clipboard = b_2 = 0.00390625 * [");
+        System.out.println(imageToTxt(fileName, 31, 2)+"]");
+        System.out.println("Send, ^v \nSleep, 500 \nSend, {Enter}");
 
     }
-    public static void main(String[] args){
-   
 
-        makeFrame("mario0.png");
+    public static void clearFrame(){
+        System.out.println("Sleep, 1000\nLoop, 3{\nSend, +`t\nSend, ^a\nSend, {Delete 2}\n}\nSleep, 1000");
+    }
+    public static void main(String[] args){
+        String[] files = {"mario0.png","mario1.png","mario2.png"}; //Write your file names here
+
+
+        for(String frame:files){
+            makeFrame("\\"+frame);
+            clearFrame();
+        }    
     }
 }
