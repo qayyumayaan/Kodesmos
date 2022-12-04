@@ -70,12 +70,13 @@ class ConvertToArray{
         }
     }
 
-    public static void toTxt(BufferedImage result, int rgb) {
+    public static String toTxt(BufferedImage result, int rgb) {
         int count = 0;
         int value = 0;
+        String toReturn = "";
         for (int i = 0; i < result.getHeight(); i++) { // Y
             for (int j = result.getWidth() - 1; j >= 0; j--) { // X
-                Color c = new Color(result.getRGB(i, j));
+                Color c = new Color(256-result.getRGB(i, j));
                 if (rgb == 0)
                     value = c.getRed();
                 else if (rgb == 1)
@@ -83,11 +84,14 @@ class ConvertToArray{
                 else if (rgb == 2)
                     value = c.getBlue();
                 count++;
+                toReturn+=value;
                 System.out.print(value);
                 if (count < result.getHeight() * result.getWidth())
-                    System.out.print(", ");
+                    toReturn+=", ";
             }
         }
+        return toReturn; 
+        
     }
 
     public static BufferedImage toGrayScaleInt(BufferedImage image) {
@@ -129,17 +133,42 @@ class ConvertToArray{
         return result;
     }
 
-    public static void imageToTxt(String fileName, int size,int rgbChannel){
+    public static String imageToTxtGrayScale(String fileName, int size,int rgbChannel){
         BufferedImage unaugmentedImage = importImage(fileName);
 
         BufferedImage resizedImage = toGrayScaleInt(scaleTo(unaugmentedImage,size,size));
 
-        toTxt(resizedImage, rgbChannel);
+        return toTxt(resizedImage, rgbChannel);
+
+    }
+    public static String imageToTxt(String fileName, int size,int rgbChannel){
+        BufferedImage unaugmentedImage = importImage(fileName);
+
+        BufferedImage resizedImage = scaleTo(unaugmentedImage,size,size);
+
+        return toTxt(resizedImage, rgbChannel);
+
+    }
+
+    public static void makeFrame(String fileName){
+        System.out.print("Clipboard = b_0 = 0.00390625 * [");
+        System.out.println(imageToTxt(fileName, 31, 0)+"]");
+
+        System.out.println("Send, ^v \nSleep, 100 \nSend, {Enter}");
+
+        System.out.print("Clipboard = b_1 = 0.00390625 * ");
+        System.out.println(imageToTxt(fileName, 31, 1));
+        System.out.println("Send, ^v \nSleep, 100 \nSend, {Enter}");
+
+
+        System.out.print("Clipboard = b_1 = 0.00390625 * ");
+        System.out.println(imageToTxt(fileName, 31, 2));
+        System.out.println("Send, ^v \nSleep, 100 \nSend, {Enter}");
 
     }
     public static void main(String[] args){
    
 
-        imageToTxt("\\Mario-Star-black.jpg", 31,1);
+        makeFrame("mario0.png");
     }
 }
