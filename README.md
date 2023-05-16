@@ -1,6 +1,9 @@
 # Kodesmos: UHACCS Hackathon Project
 Kodesmos turns an image or series of images into a parsable format by one of the most versatile graphing calculators: Desmos. Using our technology, one can submit an image or short clip and watch as their creation comes to life on the calculator. Written by Ayaan Qayyum and Ali Ahmed.  
 
+Here is our demonstration video: 
+
+
 We grew inspiration from the classical technology of the Cathode Ray Tube and how it parsed analog signal data for its use in media and utility playback. We wanted to demonstrate the utility of the Dot Matrix, so we used the Desmos graphing calculator. 
 
 We have the technology to convolve an image of any size or resolution and use byte analysis and computation to return a signal parseable with a Cathode Ray Tube device. Desmos has to support up to an index of a thousand items long, resulting in an effective resolution of 31 by 31. 
