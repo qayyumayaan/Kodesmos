@@ -2,7 +2,7 @@
 Kodesmos turns an image or series of images into a parsable format by one of the most versatile graphing calculators: Desmos. Using our technology, one can submit an image or short clip and watch as their creation comes to life on the calculator. Written by Ayaan Qayyum and Ali Ahmed.  
 
 Here is our demonstration video: 
-
+[![Watch the video](https://img.youtube.com/vi/6IL5mgzmCOE/0.jpg)](https://youtu.be/6IL5mgzmCOE)
 
 We grew inspiration from the classical technology of the Cathode Ray Tube and how it parsed analog signal data for its use in media and utility playback. We wanted to demonstrate the utility of the Dot Matrix, so we used the Desmos graphing calculator. 
 
